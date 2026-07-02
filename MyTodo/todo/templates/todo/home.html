@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todo App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'todo/styles/todo.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h3>My Todo List</h3>
+
+        <form action="" method="post" class="form-group">
+            {% csrf_token %}
+            <input type="text" name="title" id="title" placeholder="Add a new todo...">
+            <button type="submit" class="btn-submit">Add</button>
+        </form>
+        
+        {% if context %}
+            <ul class="todo-list">
+                {% for i in context %}
+                    <li class="todo-item">
+                        <div class="todo-content">
+                            <div class="todo-id">{{ i.id }}</div>
+                            <div class="todo-title">{{ i.title }}</div>
+                        </div>
+                        <div class="todo-actions">
+                            <a href="{% url 'display_todo_by_id' i.id %}" target="_blank">
+                                <button class="btn-view">View</button>
+                            </a>
+                            <a href="{% url "toggle" i.id %}">
+                                <button class="btn-toggle">
+                                    {% if i.is_completed %}
+                                        Completed
+                                    {% else %}
+                                        Incomplete
+                                    {% endif %}
+                                </button>
+                            </a> 
+                            <a href="{% url "update_todo" i.id %}">
+                                <button class="btn-update">Update</button>
+                            </a>
+                            <a href="{% url "delete_todo" i.id %}">
+                                <button class="btn-delete">Delete</button>
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="empty-state">
+                <p>No todos yet! Add one to get started.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Details</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'todo/styles/todo.css' %}">
+</head>
+<body class="detail-page">
+    <div class="container detail-container">
+        <h1>📋 Todo Details</h1>
+        <div class="todo-details">
+            <div class="detail-item">
+                <span class="detail-label">ID</span>
+                <span class="detail-value">{{ context.id }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Title</span>
+                <span class="detail-value">{{ context.title }}</span>
+            </div>
+        </div>
+        <div class="back-link">
+            <a href="/" class="btn-back">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
